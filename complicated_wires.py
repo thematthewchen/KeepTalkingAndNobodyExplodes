@@ -11,7 +11,7 @@ def complicated_wires():
 		star = input("star: ")
 
 		letter = find_letter(is_true(led), red, blue, is_true(star))
-		cut = cut_wire(letter, int(serial_number), is_true(parallel_port), int(batteries))
+		cut = cut_wire(str(letter[0]), int(serial_number), is_true(parallel_port), int(batteries))
 		if cut:
 			print("\nCUT\n")
 		else:
