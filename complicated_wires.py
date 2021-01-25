@@ -1,21 +1,29 @@
 def complicated_wires():
+	print("File Line Format: led color star\n\n")
+	file = open("input.txt", "r")
+
 	serial_number = input("Last digit of serial number: ")
 	parallel_port = input("parallel port: ")
 	batteries = input("# batteries: ")
+	print("\n\n")
 
-	while True:
-		led = input("LED: ")
-		color = input("color (w, r, b, rb): ").lower()
+	for count, line in enumerate(file):
+		line_data = line.split()
+		led = line_data[0]
+		color = line_data[1].lower()
 		red = "r" in color
 		blue = "b" in color
-		star = input("star: ")
+		star = line_data[2]
 
 		letter = find_letter(is_true(led), red, blue, is_true(star))
 		cut = cut_wire(str(letter[0]), int(serial_number), is_true(parallel_port), int(batteries))
 		if cut:
-			print("\nCUT\n")
+			print("[X]", end=" ")
 		else:
-			print("\nDON'T CUT\n")
+			print("[ ]", end=" ")
+		print("Wire " + str(count + 1) + ": LED " + led + " | COLOR " + color + " | STAR " + star)
+
+	print("\n\n")
 
 def is_true(input):
 	return input.lower() in ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
